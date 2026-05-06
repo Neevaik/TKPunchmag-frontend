@@ -6,7 +6,6 @@ export default function ProductCarousel() {
 
   return (
     <section className="border-y border-border-dark bg-[#120c0c] py-12">
-      {/* Header */}
       <div className="mb-8 flex items-center justify-between px-4 md:px-10 lg:px-40">
         <h2 className="flex items-center gap-3 text-2xl font-black uppercase tracking-tighter text-white md:text-3xl">
           <span className="material-symbols-outlined text-primary">
@@ -24,7 +23,6 @@ export default function ProductCarousel() {
         </div>
       </div>
 
-      {/* Carousel */}
       <div className="hide-scrollbar flex gap-6 overflow-x-auto px-4 pb-8 snap-x snap-mandatory md:px-10 lg:px-40">
         {products.map((p) => (
           <Link
@@ -32,7 +30,6 @@ export default function ProductCarousel() {
             href={`/product/${p.id}`}
             className="group flex w-[280px] shrink-0 snap-start flex-col gap-4 rounded-xl border border-border-dark bg-card-dark p-4 transition-all hover:border-primary/30 md:w-[320px]"
           >
-            {/* Image */}
             <div className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-lg bg-[#1a1212]">
               {p.badge && (
                 <div className="absolute left-3 top-3 z-10 rounded bg-primary px-2 py-1 text-xs font-bold uppercase tracking-wider text-white">
@@ -45,7 +42,6 @@ export default function ProductCarousel() {
               />
             </div>
 
-            {/* Info */}
             <div className="flex flex-col gap-2">
               <div className="flex items-start justify-between">
                 <div>
