@@ -6,7 +6,6 @@ const ATHLETE_BG =
 export default function AthleteSpotlight() {
   return (
     <section className="grid min-h-[500px] grid-cols-1 md:grid-cols-2">
-      {/* Photo */}
       <div
         className="relative h-[400px] w-full bg-cover bg-center md:h-auto"
         style={{ backgroundImage: `url(${ATHLETE_BG})` }}
@@ -14,7 +13,6 @@ export default function AthleteSpotlight() {
         <div className="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/50 to-transparent md:bg-gradient-to-r" />
       </div>
 
-      {/* Text */}
       <div className="flex flex-col justify-center bg-background-dark p-10 md:p-16 lg:p-24">
         <span className="mb-4 flex items-center gap-2 font-bold uppercase tracking-widest text-primary">
           <span className="h-[2px] w-8 bg-primary" />

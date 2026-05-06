@@ -19,7 +19,6 @@ const FEATURES = [
 export default function WhyWeFight() {
   return (
     <section className="bg-background-dark px-4 py-16 md:px-10 lg:px-40">
-      {/* Heading */}
       <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div className="flex flex-col gap-2">
           <h2 className="text-3xl font-black uppercase leading-none tracking-tighter text-white md:text-5xl">
@@ -33,7 +32,6 @@ export default function WhyWeFight() {
         </p>
       </div>
 
-      {/* Cards */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {FEATURES.map((f) => (
           <div
