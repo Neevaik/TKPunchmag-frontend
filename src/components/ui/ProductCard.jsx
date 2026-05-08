@@ -9,8 +9,7 @@ export default function ProductCard({
     image,
 }) {
     return (
-        <div
-            className="
+        <div className="
         group
         bg-card-dark
         rounded-2xl
@@ -23,9 +22,7 @@ export default function ProductCard({
         hover:-translate-y-1
         cursor-pointer
         flex
-        flex-col
-      "
-        >
+        flex-col">
 
             <div className="h-72 bg-cover bg-center relative overflow-hidden" style={{ backgroundImage: `url(${image})` }}>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

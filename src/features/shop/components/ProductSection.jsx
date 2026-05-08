@@ -1,9 +1,10 @@
 import ActionButton from "@/components/ui/ActionButton";
 import ProductCard from "@/components/ui/ProductCard";
-import products from "../../../lib/dataProducts";
 
-export default function ProductSection() {
+export default function ProductSection({ topRatedProducts }) {
 
+    const products = topRatedProducts.topProducts;
+    console.log("Products in ProductSection:", products);
     return (
         <section className="py-16 px-6 lg:px-20 bg-background-dark">
 
@@ -25,7 +26,7 @@ export default function ProductSection() {
                         category={product.category}
                         price={product.price}
                         rating={product.rating}
-                        image={product.image}
+                        image={product.images?.[0]}
                     />
                 ))}
 

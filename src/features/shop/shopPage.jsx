@@ -6,13 +6,23 @@ import Testimonials from "./components/Testimonials";
 import Newsletter from "./components/Newsletter";
 import GuideSection from "./components/Guide";
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const res = await fetch("http://localhost:5000/product/top-rated", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch top products");
+  }
+
+  const topRatedProducts = await res.json();
+
   return (
     <>
       <main>
         <Hero />
         <CategoryFilters />
-        <ProductSection />
+        <ProductSection topRatedProducts={topRatedProducts} />
         <GuideSection />
         <Testimonials />
         <Newsletter />
