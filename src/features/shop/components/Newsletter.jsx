@@ -35,7 +35,7 @@ export default function Newsletter() {
             "
                     />
 
-                    <ActionButton>
+                    <ActionButton className="text-xs gap-2 hover:translate-x-2">
                         Subscribe
                     </ActionButton>
 

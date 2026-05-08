@@ -10,6 +10,7 @@ export default function ActionButton({
   className = "",
   ...props
 }) {
+
   const variants = {
     primary:
       "bg-primary text-white shadow-[0_0_20px_rgba(212,17,17,0.4)] hover:bg-red-700",
@@ -25,8 +26,7 @@ export default function ActionButton({
     lg: "h-14 px-8 text-lg",
   };
 
-  const baseStyles =
-    "inline-flex items-center justify-center gap-2 rounded-lg font-bold uppercase tracking-widest transition-transform hover:scale-105 cursor-pointer";
+  const baseStyles = "inline-flex items-center justify-center gap-2 rounded-lg font-bold uppercase tracking-widest transition-all cursor-pointer hover:translate-x-2";
 
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 

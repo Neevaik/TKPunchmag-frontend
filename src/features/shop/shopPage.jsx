@@ -4,6 +4,7 @@ import CategoryFilters from "./components/CategoryFilters";
 import ProductSection from "./components/ProductSection";
 import Testimonials from "./components/Testimonials";
 import Newsletter from "./components/Newsletter";
+import GuideSection from "./components/Guide";
 
 export default function ShopPage() {
   return (
@@ -12,6 +13,7 @@ export default function ShopPage() {
         <Hero />
         <CategoryFilters />
         <ProductSection />
+        <GuideSection />
         <Testimonials />
         <Newsletter />
       </main>
