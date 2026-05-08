@@ -26,7 +26,7 @@ export default function ActionButton({
   };
 
   const baseStyles =
-    "inline-flex items-center justify-center gap-2 rounded-lg font-bold uppercase tracking-widest transition-transform hover:scale-105";
+    "inline-flex items-center justify-center gap-2 rounded-lg font-bold uppercase tracking-widest transition-transform hover:scale-105 cursor-pointer";
 
   const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 

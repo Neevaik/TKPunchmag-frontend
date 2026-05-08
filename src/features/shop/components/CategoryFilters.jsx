@@ -13,7 +13,7 @@ export default function CategoryFilters() {
             {categories.map((cat) => (
                 <button
                     key={cat}
-                    className="px-6 py-2 rounded-full text-xs font-black uppercase bg-white/5 hover:bg-primary/20"
+                    className="px-6 py-2 rounded-full text-xs font-black uppercase bg-white/5 hover:bg-primary/20 cursor-pointer transition-colors"
                 >
                     {cat}
                 </button>

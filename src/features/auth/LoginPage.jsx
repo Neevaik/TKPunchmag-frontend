@@ -161,7 +161,7 @@ export default function LoginPage() {
                                         Password
                                     </label>
                                     {mode === 'login' ? (
-                                        <Button type="button" variant="link" size="link">
+                                        <Button type="button" variant="link" size="sm">
                                             Forgot?
                                         </Button>
                                     ) : null}
