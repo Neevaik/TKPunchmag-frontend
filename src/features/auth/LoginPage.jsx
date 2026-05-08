@@ -35,6 +35,7 @@ export default function LoginPage() {
 
             const res = await fetch(url, {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -47,9 +48,8 @@ export default function LoginPage() {
                 throw new Error(data.message || "Error")
             }
 
-            console.log("SUCCESS:", data)
             if (data.ok === true) {
-                // router.push("/")
+                router.push("/")
             }
 
         } catch (err) {
