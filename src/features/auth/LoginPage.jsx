@@ -28,17 +28,12 @@ export default function LoginPage() {
                     ? "http://localhost:5000/user/login"
                     : "http://localhost:5000/user/signup"
 
-            const body =
-                mode === "login"
-                    ? { username, password }
-                    : { email, password, username }
+            const body = mode === "login" ? { username, password } : { email, password, username }
 
             const res = await fetch(url, {
                 method: "POST",
                 credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json", },
                 body: JSON.stringify(body),
             })
 

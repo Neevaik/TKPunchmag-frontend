@@ -4,7 +4,6 @@ import ProductCard from "@/components/ui/ProductCard";
 export default function ProductSection({ topRatedProducts }) {
 
     const products = topRatedProducts.topProducts;
-    console.log("Products in ProductSection:", products);
     return (
         <section className="py-16 px-6 lg:px-20 bg-background-dark">
 
