@@ -16,6 +16,10 @@ export default function Header() {
       name: "Équipement",
       items: ["Gants", "Chaussures", "Sacs"],
     },
+    {
+      name: "Compléments",
+      items: ["Protéines", "Vitamines", "Minéraux"],
+    },
   ];
 
   return (
