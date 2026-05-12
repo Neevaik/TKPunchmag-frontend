@@ -1,18 +1,34 @@
-export const CATEGORIES = {
-    "sports-de-combat": {
-        label: "Sports de Combat",
-        tabs: ["Tous", "MMA", "Boxe anglaise", "Muay Thai"],
+export const categories = [
+    {
+        name: "Sports de combat",
+        items: [
+            { label: "MMA", slug: "mma" },
+            { label: "Boxe anglaise", slug: "boxe-anglaise" },
+            { label: "Muay Thai", slug: "muay-thai" },
+        ],
     },
-    "fitness": {
-        label: "Fitness",
-        tabs: ["Tous", "Running", "Cardio", "Crossfit"],
+    {
+        name: "Fitness",
+        items: [
+            { label: "Running", slug: "running" },
+            { label: "Cardio", slug: "cardio" },
+            { label: "Crossfit", slug: "crossfit" },
+        ],
     },
-    "equipement": {
-        label: "Équipement",
-        tabs: ["Tous", "Gants", "Chaussures", "Sacs"],
+    {
+        name: "Équipement",
+        items: [
+            { label: "Gants", slug: "gants" },
+            { label: "Chaussures", slug: "chaussures" },
+            { label: "Sacs", slug: "sacs" },
+        ],
     },
-    "complement": {
-        label: "Complément",
-        tabs: ["Tous", "Protéines", "Vitamines", "Minéraux"],
+    {
+        name: "Compléments",
+        items: [
+            { label: "Protéines", slug: "proteines" },
+            { label: "Vitamines", slug: "vitamines" },
+            { label: "Minéraux", slug: "mineraux" },
+        ],
     },
-};
+];

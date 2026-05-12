@@ -1,9 +1,7 @@
-import { CATEGORIES } from "@/lib/categories";
 import CategoryPage from "@/features/category/CategoryPage";
 
-export default function Page({ params }) {
-    const config = CATEGORIES[params.category];
+export default async function Page({ params }) {
+    const { category } = await params;
 
-
-    return <CategoryPage config={config} slug={params.category} />;
+    return <CategoryPage slug={category} />;
 }
