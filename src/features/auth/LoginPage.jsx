@@ -8,7 +8,6 @@ const fieldClass =
 
 export default function LoginPage() {
     const router = useRouter()
-
     const [mode, setMode] = useState('login')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('123')
@@ -16,6 +15,7 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -25,8 +25,8 @@ export default function LoginPage() {
         try {
             const url =
                 mode === "login"
-                    ? "http://localhost:5000/user/login"
-                    : "http://localhost:5000/user/signup"
+                    ? `${API_URL}/user/login`
+                    : `${API_URL}/user/signup`
 
             const body = mode === "login" ? { username, password } : { email, password, username }
 

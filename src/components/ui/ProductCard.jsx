@@ -10,7 +10,6 @@ export default function ProductCard({
 }) {
     return (
         <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border-dark bg-card-dark transition-transform hover:scale-[1.02]">
-            {/* Image */}
             <div className="relative">
                 <img
                     src={image}
@@ -25,16 +24,12 @@ export default function ProductCard({
                 )}
             </div>
 
-            {/* Content */}
             <div className="flex flex-1 flex-col p-5">
-                {/* Top section */}
                 <div className="space-y-3">
-                    {/* Brand */}
                     <p className="text-sm uppercase tracking-wide text-primary">
                         {brand}
                     </p>
 
-                    {/* Title block */}
                     <div className="min-h-[90px]">
                         <h2 className="line-clamp-2 text-2xl font-bold text-white">
                             {title}
@@ -47,7 +42,6 @@ export default function ProductCard({
                         )}
                     </div>
 
-                    {/* Description */}
                     <div className="min-h-[72px]">
                         {description && (
                             <p className="line-clamp-3 text-sm leading-relaxed text-text-muted">
@@ -57,9 +51,7 @@ export default function ProductCard({
                     </div>
                 </div>
 
-                {/* Bottom section */}
                 <div className="mt-auto flex items-end justify-between pt-6">
-                    {/* Price + Rating */}
                     <div className="space-y-1">
                         <p className="text-2xl font-black text-white">
                             ${price}
@@ -70,7 +62,6 @@ export default function ProductCard({
                         </p>
                     </div>
 
-                    {/* Button */}
                     <button className="rounded-lg bg-primary px-4 py-2 text-sm font-bold uppercase text-white transition hover:opacity-90">
                         Add to cart
                     </button>
