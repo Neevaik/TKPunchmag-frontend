@@ -2,55 +2,48 @@
 
 import { useMemo, useState } from "react";
 import { MOCK_PRODUCTS } from "@/lib/mockData";
+
 import ProductCard from "@/components/ui/ProductCard";
+import BrandFilter from "@/components/ui/BrandFilter";
+import SortFilter from "@/components/ui/SortFilter";
+
+import {
+    filterByCategory,
+    filterByBrand,
+    sortProducts,
+} from "@/lib/helpers/filters";
 
 export default function CategoryPage({ slug }) {
     const [selectedBrand, setSelectedBrand] = useState("all");
     const [sortBy, setSortBy] = useState("featured");
 
     const categoryProducts = useMemo(() => {
-        return MOCK_PRODUCTS.filter(
-            (product) => product.category === slug
-        );
+        return filterByCategory(MOCK_PRODUCTS, slug);
     }, [slug]);
 
-    const brands = [
-        ...new Set(categoryProducts.map((product) => product.brand)),
-    ];
+    const brands = useMemo(() => {
+        return [...new Set(categoryProducts.map((p) => p.brand))];
+    }, [categoryProducts]);
 
     const filteredProducts = useMemo(() => {
-        let products = [...categoryProducts];
+        const byBrand = filterByBrand(
+            categoryProducts,
+            selectedBrand
+        );
 
-        if (selectedBrand !== "all") {
-            products = products.filter(
-                (product) => product.brand === selectedBrand
-            );
-        }
-
-        switch (sortBy) {
-            case "price-low":
-                products.sort((a, b) => a.price - b.price);
-                break;
-
-            case "price-high":
-                products.sort((a, b) => b.price - a.price);
-                break;
-
-            case "rating":
-                products.sort((a, b) => b.rating - a.rating);
-                break;
-
-            default:
-                break;
-        }
-
-        return products;
+        return sortProducts(byBrand, sortBy);
     }, [categoryProducts, selectedBrand, sortBy]);
+
+    const handleAddToCart = (product) => {
+        console.log("Add to cart:", product);
+    };
 
     return (
         <main className="min-h-screen bg-background-dark px-4 py-10 text-white md:px-10">
             <div className="mx-auto max-w-7xl">
+
                 <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+
                     <div>
                         <p className="text-sm uppercase tracking-widest text-primary">
                             Category
@@ -62,30 +55,16 @@ export default function CategoryPage({ slug }) {
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <select
+                        <BrandFilter
+                            brands={brands}
                             value={selectedBrand}
-                            onChange={(e) => setSelectedBrand(e.target.value)}
-                            className="rounded-lg border border-border-dark bg-card-dark px-4 py-2 text-sm"
-                        >
-                            <option value="all">Toutes les marques</option>
+                            onChange={setSelectedBrand}
+                        />
 
-                            {brands.map((brand) => (
-                                <option key={brand} value={brand}>
-                                    {brand}
-                                </option>
-                            ))}
-                        </select>
-
-                        <select
+                        <SortFilter
                             value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className="rounded-lg border border-border-dark bg-card-dark px-4 py-2 text-sm"
-                        >
-                            <option value="featured">Mis en avant</option>
-                            <option value="price-low">Prix croissant</option>
-                            <option value="price-high">Prix décroissant</option>
-                            <option value="rating">Mieux notés</option>
-                        </select>
+                            onChange={setSortBy}
+                        />
                     </div>
                 </div>
 
@@ -101,6 +80,9 @@ export default function CategoryPage({ slug }) {
                             brand={product.brand}
                             image={product.image}
                             description={product.description}
+                            onAddToCart={() =>
+                                handleAddToCart(product)
+                            }
                         />
                     ))}
                 </div>
@@ -116,6 +98,7 @@ export default function CategoryPage({ slug }) {
                         </p>
                     </div>
                 )}
+
             </div>
         </main>
     );
