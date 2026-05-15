@@ -45,26 +45,13 @@ export default function CategoryPage({ slug }) {
                 <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
                     <div>
-                        <p className="text-sm uppercase tracking-widest text-primary">
-                            Category
-                        </p>
-
-                        <h1 className="text-4xl font-black uppercase">
-                            {slug.replace("-", " ")}
-                        </h1>
+                        <p className="text-sm uppercase tracking-widest text-primary">Category</p>
+                        <h1 className="text-4xl font-black uppercase">{slug.replaceAll("-", " ")}</h1>
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <BrandFilter
-                            brands={brands}
-                            value={selectedBrand}
-                            onChange={setSelectedBrand}
-                        />
-
-                        <SortFilter
-                            value={sortBy}
-                            onChange={setSortBy}
-                        />
+                        <BrandFilter brands={brands} value={selectedBrand} onChange={setSelectedBrand} />
+                        <SortFilter value={sortBy} onChange={setSortBy} />
                     </div>
                 </div>
 
@@ -72,7 +59,7 @@ export default function CategoryPage({ slug }) {
                     {filteredProducts.map((product) => (
                         <ProductCard
                             key={product.id}
-                            title={product.title}
+                            name={product.name}
                             subtitle={product.subtitle}
                             price={product.price}
                             rating={product.rating}
@@ -80,24 +67,10 @@ export default function CategoryPage({ slug }) {
                             brand={product.brand}
                             image={product.image}
                             description={product.description}
-                            onAddToCart={() =>
-                                handleAddToCart(product)
-                            }
+                            onAddToCart={() => handleAddToCart(product)}
                         />
                     ))}
                 </div>
-
-                {filteredProducts.length === 0 && (
-                    <div className="mt-20 text-center">
-                        <h2 className="text-2xl font-bold">
-                            Aucun produit trouvé
-                        </h2>
-
-                        <p className="mt-2 text-text-muted">
-                            Essaye de modifier les filtres.
-                        </p>
-                    </div>
-                )}
 
             </div>
         </main>

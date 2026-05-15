@@ -8,6 +8,8 @@ export async function getTopRatedProducts() {
             }
         );
 
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
         const data = await response.json();
         return {
             products: data,

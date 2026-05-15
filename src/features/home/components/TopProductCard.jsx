@@ -1,6 +1,5 @@
 "use client";
 
-import ProductSection from "@/features/shop/components/ProductSection";
 import TopProductCard from "@/components/ui/TopProductCard";
 
 export default function ProductCarousel({ topRatedProducts }) {

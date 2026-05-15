@@ -1,6 +1,6 @@
 import ActionButton from "./ActionButton";
 
-export default function ({
+export default function TopProductCard({
     name,
     brand,
     category,
