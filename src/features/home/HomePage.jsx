@@ -5,7 +5,7 @@ import ProductCarousel from "@/features/home/components/TopProductCard";
 import AthleteSpotlight from "@/features/home/components/AthleteSpotlight";
 import ErrorState from "@/components/ui/ErrorState";
 
-import { getTopRatedProducts } from "@/lib/api/productsApi";
+import { getTopRatedProducts } from "@/lib/api/products.api";
 
 export default async function Home() {
 

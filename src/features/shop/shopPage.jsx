@@ -7,7 +7,7 @@ import Newsletter from "./components/Newsletter";
 import GuideSection from "./components/Guide";
 import ErrorState from "@/components/ui/ErrorState";
 
-import { getTopRatedProducts } from "@/lib/api/productsApi";
+import { getTopRatedProducts } from "@/lib/api/products.api";
 
 export default async function ShopPage() {
 
