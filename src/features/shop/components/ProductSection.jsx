@@ -5,8 +5,6 @@ import ErrorState from "@/components/ui/ErrorState";
 export default function ProductSection({ topRatedProducts }) {
 
 
-    const products = topRatedProducts.topProducts;
-
     return (
         <section className="py-16 px-6 lg:px-20 bg-background-dark">
 
@@ -19,9 +17,10 @@ export default function ProductSection({ topRatedProducts }) {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {products.map((product) => (
+                {topRatedProducts.map((product) => (
                     <TopProductCard
                         key={product._id}
+                        id={product._id}
                         name={product.name}
                         brand={product.brand}
                         category={product.category}

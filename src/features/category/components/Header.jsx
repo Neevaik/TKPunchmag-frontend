@@ -1,5 +1,5 @@
-import BrandFilter from "@/components/ui/BrandFilter";
-import SortFilter from "@/components/ui/SortFilter";
+import BrandFilter from "@/features/category/components/BrandFilter";
+import SortFilter from "@/features/category/components/SortFilter";
 
 export default function CategoryHeader({
     slug,
@@ -14,7 +14,7 @@ export default function CategoryHeader({
 
             <div>
                 <p className="text-sm uppercase tracking-widest text-primary">
-                    Category
+                    Categorie
                 </p>
 
                 <h1 className="text-4xl font-black uppercase">

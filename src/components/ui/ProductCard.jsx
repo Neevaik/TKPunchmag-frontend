@@ -6,7 +6,6 @@ export default function ProductCard({
     name,
     price,
     rating,
-    badge,
     brand,
     image,
     description,
@@ -19,11 +18,11 @@ export default function ProductCard({
 
                 <div className="relative">
                     <img src={image} alt={name} className="h-72 w-full object-cover" />
-                    {badge && (
+                    {/* {badge && (
                         <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase text-white">
                             {badge}
                         </span>
-                    )}
+                    )} */}
                 </div>
 
                 <div className="flex flex-1 flex-col p-5">

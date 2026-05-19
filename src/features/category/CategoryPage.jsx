@@ -3,52 +3,54 @@
 import { useEffect, useMemo, useState } from "react";
 import ProductCard from "@/components/ui/ProductCard";
 import CategoryHeader from "./components/Header";
-import {
-    filterByCategory,
-    filterByBrand,
-    sortProducts,
-} from "@/lib/helpers/filters";
+import { filterByBrand, sortProducts } from "@/lib/helpers/filters";
 import { getByCategory } from "@/lib/api/products.api";
 
 export default function CategoryPage({ slug }) {
     const [selectedBrand, setSelectedBrand] = useState("all");
-    const [sortBy, setSortBy] = useState("featured");
-
+    const [sortBy, setSortBy] = useState("rating");
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
+        if (!slug) return;
+
+        let ignore = false;
+
         const loadProducts = async () => {
             setLoading(true);
+            setError(false);
 
             const result = await getByCategory(slug);
 
-            if (!result.error) {
-                setProducts(result.products || []);
-            } else {
+            if (ignore) return;
+
+            if (result?.error) {
                 setProducts([]);
+                setError(true);
+            } else {
+                setProducts(result?.products ?? []);
             }
 
             setLoading(false);
         };
 
-        if (slug) {
-            loadProducts();
-        }
+        loadProducts();
+
+        return () => {
+            ignore = true;
+        };
     }, [slug]);
 
-    const categoryProducts = useMemo(() => {
-        return filterByCategory(products, slug);
-    }, [products, slug]);
-
     const brands = useMemo(() => {
-        return [...new Set(categoryProducts.map((p) => p.brand))];
-    }, [categoryProducts]);
+        return [...new Set(products.map((p) => p.brand))];
+    }, [products]);
 
     const filteredProducts = useMemo(() => {
-        const byBrand = filterByBrand(categoryProducts, selectedBrand);
+        const byBrand = filterByBrand(products, selectedBrand);
         return sortProducts(byBrand, sortBy);
-    }, [categoryProducts, selectedBrand, sortBy]);
+    }, [products, selectedBrand, sortBy]);
 
     const handleAddToCart = (product) => {
         console.log("Add to cart:", product);
@@ -66,27 +68,24 @@ export default function CategoryPage({ slug }) {
         <main className="min-h-screen bg-background-dark px-4 py-10 text-white md:px-10">
             <div className="mx-auto max-w-7xl">
 
-                <CategoryHeader
-                    slug={slug}
-                    brands={brands}
-                    selectedBrand={selectedBrand}
-                    setSelectedBrand={setSelectedBrand}
-                    sortBy={sortBy}
-                    setSortBy={setSortBy}
-                />
+                <CategoryHeader slug={slug} brands={brands} selectedBrand={selectedBrand} setSelectedBrand={setSelectedBrand} sortBy={sortBy} setSortBy={setSortBy} />
+
+                {error && (
+                    <p className="text-red-400 mb-4">
+                        Erreur lors du chargement des produits
+                    </p>
+                )}
 
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                     {filteredProducts.map((product) => (
                         <ProductCard
-                            key={product.id}
-                            id={product.id}
+                            key={product._id}
+                            id={product._id}
                             name={product.name}
-                            subtitle={product.subtitle}
                             price={product.price}
                             rating={product.rating}
-                            badge={product.badge}
                             brand={product.brand}
-                            image={product.images[0]}
+                            image={product.images?.[0]}
                             description={product.description}
                             onAddToCart={() => handleAddToCart(product)}
                         />
