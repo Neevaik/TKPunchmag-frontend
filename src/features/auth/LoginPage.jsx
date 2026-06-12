@@ -15,7 +15,7 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const API_URL = process.env.LOCALHOST_API;
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -29,6 +29,8 @@ export default function LoginPage() {
                     : `${API_URL}/user/signup`
 
             const body = mode === "login" ? { username, password } : { email, password, username }
+
+            console.log("Submitting:", { url, body, username, password, email })
 
             const res = await fetch(url, {
                 method: "POST",

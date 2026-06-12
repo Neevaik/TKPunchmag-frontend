@@ -52,10 +52,6 @@ export default function CategoryPage({ slug }) {
         return sortProducts(byBrand, sortBy);
     }, [products, selectedBrand, sortBy]);
 
-    const handleAddToCart = (product) => {
-        console.log("Add to cart:", product);
-    };
-
     if (loading) {
         return (
             <main className="min-h-screen bg-background-dark text-white flex items-center justify-center">
@@ -87,7 +83,6 @@ export default function CategoryPage({ slug }) {
                             brand={product.brand}
                             image={product.images?.[0]}
                             description={product.description}
-                            onAddToCart={() => handleAddToCart(product)}
                         />
                     ))}
                 </div>

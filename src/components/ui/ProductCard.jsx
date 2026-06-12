@@ -1,6 +1,7 @@
 import ActionButton from "./ActionButton";
 import Link from "next/link";
 import Image from "next/image";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function ProductCard({
     id,
@@ -10,12 +11,37 @@ export default function ProductCard({
     brand,
     image,
     description,
-    onAddToCart,
 }) {
 
-
-
     const cloudinaryBase = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/`;
+
+    const handleAddToCart = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        console.log("token:", token);
+
+        try {
+            const res = await fetch(`${API_URL}/cart/add`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    productId: id,
+                    quantity: 1,
+                }),
+            });
+
+            const data = await res.json();
+            console.log("🛒 Cart response:", data);
+
+        } catch (err) {
+            console.error("Cart error:", err);
+        }
+    };
+
 
     return (
         <Link href={`/product/${id}`} className="block h-full">
@@ -65,7 +91,7 @@ export default function ProductCard({
                             </p>
                         </div>
 
-                        <div onClick={(e) => { e.preventDefault(); onAddToCart?.(); }}>
+                        <div onClick={handleAddToCart}>
                             <ActionButton size="sm">
                                 Ajouter au panier
                             </ActionButton>
