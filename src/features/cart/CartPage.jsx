@@ -40,12 +40,41 @@ export default function CartPage() {
             }
 
             const data = await res.json();
-            console.log("Checkout success:", data);
+            console.log("Order created:", data);
+
+            const orderId = data?.order?._id;
+
+            if (!orderId) {
+                throw new Error("Order ID not found");
+            }
+
+            const paymentRes = await fetch(
+                "http://localhost:5000/payment/create-intent",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        orderId: orderId,
+                    }),
+                }
+            );
+
+            if (!paymentRes.ok) {
+                throw new Error("Payment intent failed");
+            }
+
+            const paymentData = await paymentRes.json();
+
+            console.log("Stripe payment intent:", paymentData);
 
             setConfirmed(true);
+
         } catch (err) {
             console.error(err);
-            setCheckoutError("Impossible de finaliser la commande.");
+            setCheckoutError("Impossible de finaliser la commande ou le paiement.");
         } finally {
             setIsCheckingOut(false);
         }
@@ -167,11 +196,10 @@ export default function CartPage() {
                         <button
                             onClick={handleConfirm}
                             disabled={items.length === 0 || isCheckingOut}
-                            className={`w-full py-3 font-bold uppercase tracking-widest transition ${
-                                items.length === 0 || isCheckingOut
-                                    ? "cursor-not-allowed bg-gray-600"
-                                    : "bg-green-600 hover:bg-green-500"
-                            }`}
+                            className={`w-full py-3 font-bold uppercase tracking-widest transition ${items.length === 0 || isCheckingOut
+                                ? "cursor-not-allowed bg-gray-600"
+                                : "bg-green-600 hover:bg-green-500"
+                                }`}
                         >
                             {isCheckingOut
                                 ? "Validation..."
