@@ -17,16 +17,12 @@ export default function ProductCard({
 
     const handleAddToCart = async (e) => {
         e.preventDefault();
-        const token = localStorage.getItem("token");
-        console.log("token:", token);
-
         try {
             const res = await fetch(`${API_URL}/cart/add`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     productId: id,
