@@ -3,6 +3,11 @@
 import { useState } from "react";
 import { useCart } from "@/hooks/useCart";
 import ErrorState from "@/components/ui/ErrorState";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./components/CheckoutForm";
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function CartPage() {
     const { cart, loading, error, removeItem } = useCart();
@@ -10,6 +15,7 @@ export default function CartPage() {
     const [confirmed, setConfirmed] = useState(false);
     const [isCheckingOut, setIsCheckingOut] = useState(false);
     const [checkoutError, setCheckoutError] = useState(null);
+    const [clientSecret, setClientSecret] = useState(null);
 
     const items = cart?.items ?? [];
 
@@ -67,10 +73,12 @@ export default function CartPage() {
             }
 
             const paymentData = await paymentRes.json();
-
             console.log("Stripe payment intent:", paymentData);
 
-            setConfirmed(true);
+            const clientSecret = paymentData.clientSecret;
+            console.log("Stripe payment intent:", paymentData);
+
+            setClientSecret(clientSecret);
 
         } catch (err) {
             console.error(err);
@@ -101,7 +109,6 @@ export default function CartPage() {
         <div className="relative flex min-h-screen flex-col items-center justify-start bg-background-dark px-4 py-8 md:py-12">
             <main className="w-full max-w-2xl overflow-hidden rounded-xl border border-white/5 bg-[#1a0c0c] shadow-2xl">
 
-                {/* HEADER */}
                 <div className="relative overflow-hidden bg-primary px-6 py-8 text-center">
                     <h1 className="mb-2 text-5xl font-black italic tracking-tighter md:text-6xl">
                         {confirmed ? "COMMANDE CONFIRMÉE !" : "MON PANIER"}
@@ -191,15 +198,15 @@ export default function CartPage() {
                         </p>
                     )}
 
-                    {/* BUTTON */}
-                    {!confirmed && (
+                    {clientSecret ? (
+                        <Elements stripe={stripePromise} options={{ clientSecret }}>
+                            <CheckoutForm onSuccess={() => setConfirmed(true)} />
+                        </Elements>
+                    ) : (
                         <button
                             onClick={handleConfirm}
                             disabled={items.length === 0 || isCheckingOut}
-                            className={`w-full py-3 font-bold uppercase tracking-widest transition ${items.length === 0 || isCheckingOut
-                                ? "cursor-not-allowed bg-gray-600"
-                                : "bg-green-600 hover:bg-green-500"
-                                }`}
+                            className="w-full rounded-lg bg-primary py-4 text-lg font-bold uppercase tracking-wide text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {isCheckingOut
                                 ? "Validation..."
@@ -207,7 +214,6 @@ export default function CartPage() {
                         </button>
                     )}
 
-                    {/* SUCCESS */}
                     {confirmed && (
                         <div className="pt-4 text-center">
                             <span className="inline-block rounded-full bg-green-500/10 px-4 py-2 text-sm font-medium text-green-400">
@@ -216,7 +222,7 @@ export default function CartPage() {
                         </div>
                     )}
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }
