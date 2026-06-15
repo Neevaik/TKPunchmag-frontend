@@ -46,7 +46,6 @@ export default function CartPage() {
             }
 
             const data = await res.json();
-            console.log("Order created:", data);
 
             const orderId = data?.order?._id;
 
@@ -73,15 +72,12 @@ export default function CartPage() {
             }
 
             const paymentData = await paymentRes.json();
-            console.log("Stripe payment intent:", paymentData);
 
             const clientSecret = paymentData.clientSecret;
-            console.log("Stripe payment intent:", paymentData);
 
             setClientSecret(clientSecret);
 
         } catch (err) {
-            console.error(err);
             setCheckoutError("Impossible de finaliser la commande ou le paiement.");
         } finally {
             setIsCheckingOut(false);

@@ -31,7 +31,6 @@ export default function ProductCard({
             });
 
             const data = await res.json();
-            console.log("🛒 Cart response:", data);
 
         } catch (err) {
             console.error("Cart error:", err);

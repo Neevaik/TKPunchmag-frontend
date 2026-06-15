@@ -39,7 +39,6 @@ export async function getProductById(id) {
 export async function getByCategory(category) {
     try {
         if (!category) throw new Error("Missing category");
-        console.log(`${NEXT_PUBLIC_PRODUCT_API_URL}`)
         const response = await fetch(`${NEXT_PUBLIC_PRODUCT_API_URL}/category/${category}`, { next: { revalidate: 60 }, });
 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
