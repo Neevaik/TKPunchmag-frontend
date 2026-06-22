@@ -1,4 +1,5 @@
 const NEXT_PUBLIC_PRODUCT_API_URL = process.env.NEXT_PUBLIC_PRODUCT_API_URL;
+console.log("NEXT_PUBLIC_PRODUCT_API_URL : ", NEXT_PUBLIC_PRODUCT_API_URL)
 
 export async function getTopRatedProducts() {
     try {
@@ -40,7 +41,7 @@ export async function getByCategory(category) {
     try {
         if (!category) throw new Error("Missing category");
         const response = await fetch(`${NEXT_PUBLIC_PRODUCT_API_URL}/category/${category}`, { next: { revalidate: 60 }, });
-
+        console.log("response : ", response)
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         return await response.json();

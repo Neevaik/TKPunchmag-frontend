@@ -8,6 +8,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./components/CheckoutForm";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 
 export default function CartPage() {
     const { cart, loading, error, removeItem } = useCart();
@@ -30,7 +32,7 @@ export default function CartPage() {
             setIsCheckingOut(true);
             setCheckoutError(null);
 
-            const res = await fetch("http://localhost:5000/order/checkout/", {
+            const res = await fetch(`${API_URL}/order/checkout/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -54,7 +56,7 @@ export default function CartPage() {
             }
 
             const paymentRes = await fetch(
-                "http://localhost:5000/payment/create-intent",
+                `${API_URL}/payment/create-intent`,
                 {
                     method: "POST",
                     headers: {
@@ -119,7 +121,6 @@ export default function CartPage() {
 
                 <div className="p-6 md:p-10 space-y-6">
 
-                    {/* ITEMS */}
                     <div>
                         <h2 className="mb-4 text-sm uppercase tracking-widest text-white/60">
                             Articles
@@ -169,7 +170,6 @@ export default function CartPage() {
                         )}
                     </div>
 
-                    {/* TOTAL */}
                     <div className="space-y-2 border-t border-white/10 pt-4">
                         <div className="flex justify-between text-white/70">
                             <span>Sous-total</span>
@@ -187,7 +187,6 @@ export default function CartPage() {
                         </div>
                     </div>
 
-                    {/* ERROR */}
                     {checkoutError && (
                         <p className="text-center text-sm text-red-400">
                             {checkoutError}
