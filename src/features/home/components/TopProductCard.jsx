@@ -2,7 +2,10 @@
 
 import TopProductCard from "@/components/ui/TopProductCard";
 
+
 export default function ProductCarousel({ topRatedProducts }) {
+
+
 
   return (
     <section className="border-y border-border-dark bg-[#120c0c] py-12">

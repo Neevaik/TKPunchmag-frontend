@@ -10,11 +10,15 @@ export default function TopProductCard({
     rating,
     image,
 }) {
+
+    const cloudinaryBase = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/`;
+    const imageUrl = image?.startsWith("http") ? image : `${cloudinaryBase}${image}`;
+
     return (
         <Link href={`/product/${id}`} className="block h-full">
             <div className="group bg-card-dark rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col">
 
-                <div className="h-72 bg-cover bg-center relative overflow-hidden" style={{ backgroundImage: `url(${image})` }}>
+                <div className="h-72 bg-cover bg-center relative overflow-hidden" style={{ backgroundImage: `url(${imageUrl})` }}>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <span className="absolute top-4 left-4 bg-primary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
                         {category}

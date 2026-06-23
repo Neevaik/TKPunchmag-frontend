@@ -41,7 +41,6 @@ export async function getByCategory(category) {
     try {
         if (!category) throw new Error("Missing category");
         const response = await fetch(`${NEXT_PUBLIC_PRODUCT_API_URL}/category/${category}`, { next: { revalidate: 60 }, });
-        console.log("response : ", response)
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         return await response.json();
