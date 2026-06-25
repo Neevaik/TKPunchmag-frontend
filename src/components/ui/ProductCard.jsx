@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ActionButton from "./ActionButton";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,12 +14,12 @@ export default function ProductCard({
     description,
 }) {
 
+    const [added, setAdded] = useState(false);
     const cloudinaryBase = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/`;
 
     const handleAddToCart = async (e) => {
         e.preventDefault();
-        
-         console.log("Cookies:", document.cookie);
+        e.stopPropagation();
 
         try {
             const res = await fetch(`${API_URL}/cart/add`, {
@@ -33,15 +34,24 @@ export default function ProductCard({
 
             const data = await res.json();
             console.log("Add to cart response:", data);
+
+            setAdded(true);
+            setTimeout(() => setAdded(false), 2000);
         } catch (err) {
             console.error("Cart error:", err);
         }
     };
 
-
     return (
         <Link href={`/product/${id}`} className="block h-full">
-            <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border-dark bg-card-dark transition-transform hover:scale-[1.02] cursor-pointer">
+            <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border-dark bg-card-dark transition-transform hover:scale-[1.02] cursor-pointer relative">
+
+                {/* Notification flottante */}
+                {added && (
+                    <div className="absolute top-4 right-4 z-20 bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-fade-in">
+                        Ajouté au panier ✓
+                    </div>
+                )}
 
                 <div className="relative">
                     <Image
@@ -89,7 +99,7 @@ export default function ProductCard({
 
                         <div onClick={handleAddToCart}>
                             <ActionButton size="sm">
-                                Ajouter au panier
+                                {added ? "Ajouté ✓" : "Ajouter au panier"}
                             </ActionButton>
                         </div>
                     </div>

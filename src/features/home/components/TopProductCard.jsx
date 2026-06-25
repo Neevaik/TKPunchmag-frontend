@@ -5,8 +5,6 @@ import TopProductCard from "@/components/ui/TopProductCard";
 
 export default function ProductCarousel({ topRatedProducts }) {
 
-
-
   return (
     <section className="border-y border-border-dark bg-[#120c0c] py-12">
       <div className="mb-8 flex items-center justify-between px-4 md:px-10 lg:px-40">
