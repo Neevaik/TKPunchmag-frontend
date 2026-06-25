@@ -30,8 +30,6 @@ export default function LoginPage() {
 
             const body = mode === "login" ? { username, password } : { email, password, username }
 
-            console.log("Submitting:", { url, body, username, password, email })
-
             const res = await fetch(url, {
                 method: "POST",
                 credentials: "include",

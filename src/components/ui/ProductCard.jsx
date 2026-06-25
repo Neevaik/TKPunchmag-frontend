@@ -17,13 +17,14 @@ export default function ProductCard({
 
     const handleAddToCart = async (e) => {
         e.preventDefault();
+        
+         console.log("Cookies:", document.cookie);
+
         try {
             const res = await fetch(`${API_URL}/cart/add`, {
                 method: "POST",
                 credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     productId: id,
                     quantity: 1,
