@@ -6,9 +6,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export function useCart() {
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     const fetchCart = async () => {
         try {
+            setError(null);
             const res = await fetch(`${API_URL}/cart`, {
                 credentials: "include",
             });
@@ -17,6 +19,7 @@ export function useCart() {
             setCart(data ?? []);
         } catch {
             setCart([]);
+            setError("Impossible de charger le panier");
         } finally {
             setLoading(false);
         }
@@ -35,14 +38,17 @@ export function useCart() {
     };
 
     const removeItem = async (productId) => {
-        await fetch(`${API_URL}/cart/remove`, {
-            method: "DELETE",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ productId }),
-        });
-        fetchCart();
+        try {
+            const res = await fetch(`${API_URL}/cart/remove/${productId}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+            if (!res.ok) throw new Error();
+            fetchCart();
+        } catch {
+            setError("Impossible de retirer cet article");
+        }
     };
 
-    return { cart, loading, addItem, removeItem };
+    return { cart, loading, error, addItem, removeItem };
 }
