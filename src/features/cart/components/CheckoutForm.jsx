@@ -1,4 +1,3 @@
-// src/features/cart/components/CheckoutForm.jsx
 "use client";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useState } from "react";

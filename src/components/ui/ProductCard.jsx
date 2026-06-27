@@ -46,7 +46,6 @@ export default function ProductCard({
         <Link href={`/product/${id}`} className="block h-full">
             <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border-dark bg-card-dark transition-transform hover:scale-[1.02] cursor-pointer relative">
 
-                {/* Notification flottante */}
                 {added && (
                     <div className="absolute top-4 right-4 z-20 bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-fade-in">
                         Ajouté au panier ✓
