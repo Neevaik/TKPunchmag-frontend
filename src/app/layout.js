@@ -29,3 +29,6 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+// structure global de toutes mes pages
+// header - styles - fonts - seo - html base
