@@ -4,6 +4,15 @@ import Link from "next/link";
 
 export default function Header() {
 
+  async function handleLogout() {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    window.location.href = "/";
+  }
+
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between border-b border-border-dark bg-background-dark/95 px-4 py-3 backdrop-blur-md md:px-10">
       <div className="flex items-center gap-8">
@@ -68,6 +77,7 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-3">
+
         <label className="group hidden h-10 max-w-64 min-w-40 flex-col md:flex">
           <div className="flex h-full w-full items-stretch rounded-lg border border-transparent transition-colors group-focus-within:border-primary/50">
             <div className="flex items-center justify-center rounded-l-lg bg-card-dark pl-4 text-text-muted">
@@ -90,6 +100,13 @@ export default function Header() {
         >
           <span className="material-symbols-outlined">person</span>
         </Link>
+
+        <button
+          onClick={handleLogout}
+          className="flex size-10 items-center justify-center rounded-lg bg-red-600 text-white hover:bg-red-700"
+        >
+          <span className="material-symbols-outlined">logout</span>
+        </button>
 
         <Link
           href="/cart"
