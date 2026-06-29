@@ -9,13 +9,12 @@ export default function AddToCartButton({ productId }) {
     const [added, setAdded] = useState(false);
 
     const handleAddToCart = async () => {
+
         try {
             const res = await fetch(`${API_URL}/cart/add`, {
                 method: "POST",
                 credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     productId,
                     quantity: 1,

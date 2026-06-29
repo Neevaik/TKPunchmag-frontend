@@ -9,8 +9,8 @@ export default function useAuthForm() {
 
     const [mode, setMode] = useState("login");
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("bob");
+    const [password, setPassword] = useState("123");
     const [showPassword, setShowPassword] = useState(false);
 
     const [loading, setLoading] = useState(false);
@@ -28,8 +28,11 @@ export default function useAuthForm() {
         setLoading(true);
         setError("");
 
+
         try {
             const url = `${API_URL}/user/${isLogin ? "login" : "signup"}`;
+            console.log("url : ", url)
+
 
             const body = isLogin
                 ? { username, password }

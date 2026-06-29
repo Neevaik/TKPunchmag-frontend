@@ -6,22 +6,14 @@ export default function AuthModeToggle({ mode, setMode }) {
             <button
                 type="button"
                 onClick={() => setMode("login")}
-                className={`flex-1 rounded-md py-2 text-xs font-bold uppercase tracking-widest transition-colors ${mode === "login"
-                        ? "bg-primary text-white"
-                        : "text-white/50 hover:text-white"
-                    }`}
-            >
+                className={`flex-1 rounded-md py-2 text-xs font-bold uppercase tracking-widest transition-colors ${mode === "login" ? "bg-primary text-white" : "text-white/50 hover:text-white"}`}>
                 Login
             </button>
 
             <button
                 type="button"
                 onClick={() => setMode("signup")}
-                className={`flex-1 rounded-md py-2 text-xs font-bold uppercase tracking-widest transition-colors ${mode === "signup"
-                        ? "bg-primary text-white"
-                        : "text-white/50 hover:text-white"
-                    }`}
-            >
+                className={`flex-1 rounded-md py-2 text-xs font-bold uppercase tracking-widest transition-colors ${mode === "signup" ? "bg-primary text-white" : "text-white/50 hover:text-white"}`}>
                 Sign up
             </button>
         </div>
